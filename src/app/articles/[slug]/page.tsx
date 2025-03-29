@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { posts } from "../../../../.velite"
 import { MDXContent } from "@/components/mdx-content";
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   console.log("Generating static params for posts");
   return posts.map((post) => ({ slug: post.slugAsParams }));
 }
