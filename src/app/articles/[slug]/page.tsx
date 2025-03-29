@@ -25,7 +25,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   );
 }
 
-async function getPostFromParams(slug: string) {
+export async function getPostFromParams(slug: string) {
   const post = posts.find((post) => post.slugAsParams === slug);
   if (!post) return null;
   return post;
