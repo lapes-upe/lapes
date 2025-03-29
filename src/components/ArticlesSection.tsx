@@ -9,6 +9,9 @@ function getLatestArticles() {
 
 export const ArticlesSection = () => {
   const latestArticles = getLatestArticles();
+
+  if (latestArticles.length === 0) return null;
+
   return (
     <div className="flex flex-col">
       <h1 className="font-serif text-4xl text-primary font-normal">Articles</h1>
