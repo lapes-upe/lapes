@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #fefefe;
@@ -17,4 +18,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
+
+
+  .subheading-anchor {
+    @apply no-underline hover:no-underline;
+    @apply font-serif;
+  }
 }
+

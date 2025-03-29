@@ -1,0 +1,38 @@
+import { notFound } from "next/navigation";
+import { posts } from "../../../../.velite"
+import { MDXContent } from "@/components/mdx-content";
+
+interface PostPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function PostPage({ params }: PostPageProps) {
+  const post = await getPostFromParams(params);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <article className="container py-6 prose max-w-3xl mx-auto font-sans">
+      <h1 className="mb-2 font-serif text-primary">{post.title.toLowerCase()}</h1>
+      <MDXContent code={post.body} />
+    </article>
+  );
+}
+
+async function getPostFromParams(params: PostPageProps["params"]) {
+  const { slug } = await params;
+  const post = posts.find((post) => post.slugAsParams === slug);
+  if (!post) return null;
+  return post;
+}
+
+export async function generateStaticParams(): Promise<
+  PostPageProps["params"][]
+> {
+  return posts.map((post) => ({ slug: post.slugAsParams }));
+}
+
