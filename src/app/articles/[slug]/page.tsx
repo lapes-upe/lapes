@@ -2,14 +2,9 @@ import { notFound } from "next/navigation";
 import { posts } from "../../../../.velite"
 import { MDXContent } from "@/components/mdx-content";
 
-interface PostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function PostPage({ params }: PostPageProps) {
-  const post = await getPostFromParams(params);
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await getPostFromParams(slug);
 
   if (!post) {
     notFound();
@@ -23,16 +18,15 @@ export default async function PostPage({ params }: PostPageProps) {
   );
 }
 
-async function getPostFromParams(params: PostPageProps["params"]) {
-  const { slug } = await params;
+async function getPostFromParams(slug: string) {
   const post = posts.find((post) => post.slugAsParams === slug);
   if (!post) return null;
   return post;
 }
 
-export async function generateStaticParams(): Promise<
-  PostPageProps["params"][]
-> {
-  return posts.map((post) => ({ slug: post.slugAsParams }));
-}
-
+// export async function generateStaticParams(): Promise<
+//   PostPageProps["params"][]
+// > {
+//   return posts.map((post) => ({ slug: post.slugAsParams }));
+// }
+//
