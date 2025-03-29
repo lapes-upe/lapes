@@ -24,9 +24,8 @@ async function getPostFromParams(slug: string) {
   return post;
 }
 
-// export async function generateStaticParams(): Promise<
-//   PostPageProps["params"][]
-// > {
-//   return posts.map((post) => ({ slug: post.slugAsParams }));
-// }
-//
+export async function generateStaticParams(): Promise<
+  { slug: string }[]
+> {
+  return posts.map((post) => ({ slug: post.slugAsParams }));
+}

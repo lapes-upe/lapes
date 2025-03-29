@@ -15,7 +15,7 @@ export const CustomImage = ({ src, alt, width, height }: CustomImageProps) => {
         style={{ width, height }}
       />
       <div className="relative">
-        <Image src={src} alt={alt} width={width} height={height} />
+        <Image src={`/lapes/${src}`} alt={alt} width={width} height={height} />
       </div>
     </div>
   )
